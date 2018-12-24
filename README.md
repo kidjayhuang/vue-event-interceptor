@@ -5,7 +5,7 @@
 ## 1: 拦截器原理，入口部分
  
 **app.js**
-```
+```js
 import eventInterceptor from "./utils/eventInterceptor";
 
 const router = new VueRouter({
@@ -24,7 +24,7 @@ eventInterceptor(router,beforeFn)
 
 
 **eventInterceptor.js**
-```
+```js
 
 function eventInterceptor (routerInstance) {
 
@@ -42,7 +42,7 @@ function eventInterceptor (routerInstance) {
 >将vue路由实例传进拦截器函数，获取所有单页组件
 
 ## 2： 外层递归部分
-```
+```js
 function outerRecursion (ele) {
   if (typeof ele === 'function') {
     ele().then(e => {
@@ -57,7 +57,7 @@ function outerRecursion (ele) {
 第一种是一个返回promise对象的函数，第二种直接是一个对象，外递归函数的作用就分别处理这两种形式，最终传递一个组件对象给内递归函数
 
 ## 3： 内层递归遍历部分
-```
+```js
 function innerRecursion (currentCom,beforeFn) {
   if (currentCom.methods) {
     for (let k in currentCom.methods) {
